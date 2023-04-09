@@ -1,5 +1,5 @@
 # action.yaml
-name: 'Custom Github Action'
+name: 'Oss test Github Action'
 description: 'A Github Action that takes an input and returns the square of the number'
 inputs:
   num:
@@ -11,6 +11,9 @@ outputs:
     description: 'Square of the input'
     # need to specify the extra `value` field for `composite` actions
     value: ${{ steps.get-square.outputs.num_squared }}
+  num_add:
+    description: 'Add of the input'
+    value: ${{ steps.get-add.outputs.num_added }}
 runs:
   using: 'composite'
   steps:
@@ -28,4 +31,8 @@ runs:
     - name: Fetch the number's square
       id: get-square
       run: python src/get_num_square.py
+      shell: bash
+    - name : Fetch the number's add
+      id: get-add
+      run: python src/get_num_add.py
       shell: bash
